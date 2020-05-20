@@ -10,13 +10,15 @@
 using namespace std;
 using namespace UDT;
 
-int main() {
+int main(int argc, char** argv) {
+    const char *const server_ip = argc > 1? argv[1] : "127.0.0.1";
+
     UDTSOCKET client = UDT::socket(AF_INET, SOCK_STREAM, 0);
 
     sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(6890);
-    inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);   // server address here
+    inet_pton(AF_INET, server_ip, &serv_addr.sin_addr);   // server address here
     memset(&(serv_addr.sin_zero), '\0', 8);
 
     // selecting random local port
