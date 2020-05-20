@@ -36,19 +36,19 @@ int main() {
     // binding my port
     if (UDT::ERROR == UDT::bind(client, (sockaddr*)&my_addr, sizeof(my_addr))) {
         cout << "bind error: " << UDT::getlasterror().getErrorMessage();
-        return 0;
+        return 1;
     }
 
     // connect to the server
     if (UDT::ERROR == UDT::connect(client, (sockaddr*)&serv_addr, sizeof(serv_addr))) {
         cout << "connect error: " << UDT::getlasterror().getErrorMessage();
-        return 42;
+        return 2;
     }
 
     char data[6];
     if (UDT::ERROR == UDT::recv(client, data, 6, 0)) {
         cout << "recv error:" << UDT::getlasterror().getErrorMessage() << endl;
-        return 0;
+        return 3;
     }
 
     sockaddr_in peer_addr;
@@ -65,15 +65,15 @@ int main() {
 
     if (UDT::ERROR == UDT::bind(client, (sockaddr*)&my_addr, sizeof(my_addr))) {
         cout << "bind error: " << UDT::getlasterror().getErrorMessage();
-        return 0;
+        return 4;
     }
 
     if (UDT::ERROR == UDT::connect(client, (sockaddr*)&peer_addr, sizeof(peer_addr))) {
         cout << "connect error: " << UDT::getlasterror().getErrorMessage();
-        return 42;
+        return 5;
     }
     cout << "SUCCESS!\n";
     sleep(2); // give another client time to connect too
 
-    return 1;
+    return 0;
 }

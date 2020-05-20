@@ -16,7 +16,7 @@ int main() {
 
     if (UDT::ERROR == UDT::bind(serv, (sockaddr*)&my_addr, sizeof(my_addr))) {
         cout << "bind error: " << UDT::getlasterror().getErrorMessage();
-        return 0;
+        return 1;
     }
 
     UDT::listen(serv, 10);
@@ -51,5 +51,5 @@ int main() {
 
     UDT::close(serv);
 
-    return 1;
+    return 0;
 }
