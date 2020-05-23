@@ -73,7 +73,7 @@ int main() {
         return 5;
     }
     cout << "SUCCESS!\n";
-    sleep(2); // give another client time to connect too
+    UDT::close(client);
 
     return 0;
 }
