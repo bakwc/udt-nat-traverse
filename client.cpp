@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <random>
 
 #include <arpa/inet.h>
 #include <udt/udt.h>
@@ -22,8 +23,10 @@ int main(int argc, char** argv) {
     memset(&(serv_addr.sin_zero), '\0', 8);
 
     // selecting random local port
-    srand(time(NULL));
-    int myPort = 9001 + rand() % 200;
+    std::random_device rd;
+    std::default_random_engine re(rd());
+    std::uniform_int_distribution<int> uniform_dist(9001, 9200);
+    int myPort = uniform_dist(re);
     printf("my port: %d\n", myPort);
 
     sockaddr_in my_addr;
